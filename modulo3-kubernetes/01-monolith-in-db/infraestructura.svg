@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" role="img" aria-labelledby="title description">
+  <title id="title">Infraestructura del monolito Todo en Kubernetes</title>
+  <desc id="description">El navegador accede al Service LoadBalancer de la aplicación, que enruta al pod web. La aplicación se conecta al Service interno de PostgreSQL. PostgreSQL persiste datos a través de un PVC y PV hostPath en el nodo.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#425466"/>
+    </marker>
+    <marker id="arrow-dashed" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#7c6bb1"/>
+    </marker>
+    <style>
+      text { font-family: "Segoe UI", Arial, sans-serif; fill: #172b4d; }
+      .heading { font-size: 25px; font-weight: 700; }
+      .subheading { font-size: 14px; fill: #536579; }
+      .node-title { font-size: 17px; font-weight: 700; }
+      .node-copy { font-size: 14px; fill: #40556c; }
+      .small { font-size: 12px; fill: #536579; }
+      .boundary { fill: #f7f9fc; stroke: #9aabc0; stroke-width: 2; stroke-dasharray: 9 7; }
+      .edge { fill: none; stroke: #425466; stroke-width: 3; marker-end: url(#arrow); }
+      .config-edge { fill: none; stroke: #7c6bb1; stroke-width: 2.5; stroke-dasharray: 7 6; marker-end: url(#arrow-dashed); }
+      .external { fill: #fff; stroke: #77899e; stroke-width: 2; }
+      .service { fill: #e8f3ff; stroke: #3983c4; stroke-width: 2; }
+      .workload { fill: #e8f7f0; stroke: #31936a; stroke-width: 2; }
+      .config { fill: #f2edff; stroke: #8068ba; stroke-width: 2; }
+      .storage { fill: #fff3dc; stroke: #d39028; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="850" rx="24" fill="#ffffff"/>
+  <text x="48" y="52" class="heading">Todo app + PostgreSQL en Kubernetes</text>
+  <text x="48" y="78" class="subheading">Tráfico HTTP, conexión interna y persistencia en un directorio del nodo</text>
+
+  <rect x="245" y="105" width="910" height="700" rx="20" class="boundary"/>
+  <text x="275" y="137" class="node-title">Clúster Kubernetes</text>
+
+  <rect x="45" y="191" width="160" height="82" rx="14" class="external"/>
+  <text x="125" y="224" text-anchor="middle" class="node-title">Navegador</text>
+  <text x="125" y="249" text-anchor="middle" class="node-copy">localhost:8080</text>
+
+  <path d="M205 232H365" class="edge"/>
+  <text x="285" y="217" text-anchor="middle" class="small">HTTP</text>
+
+  <rect x="365" y="175" width="390" height="112" rx="14" class="service"/>
+  <text x="560" y="210" text-anchor="middle" class="node-title">Service: todo-app</text>
+  <text x="560" y="237" text-anchor="middle" class="node-copy">LoadBalancer · puerto 8080</text>
+  <text x="560" y="261" text-anchor="middle" class="node-copy">targetPort: 3000</text>
+
+  <path d="M560 287V345" class="edge"/>
+
+  <rect x="365" y="345" width="390" height="112" rx="14" class="workload"/>
+  <text x="560" y="380" text-anchor="middle" class="node-title">Deployment: todo-app</text>
+  <text x="560" y="407" text-anchor="middle" class="node-copy">Pod de la aplicación · puerto 3000</text>
+  <text x="560" y="431" text-anchor="middle" class="node-copy">ConfigMap: todo-app-cm</text>
+
+  <rect x="825" y="345" width="285" height="112" rx="14" class="config"/>
+  <text x="967" y="380" text-anchor="middle" class="node-title">Configuración app</text>
+  <text x="967" y="407" text-anchor="middle" class="node-copy">DB_HOST: todo-app-data-service</text>
+  <text x="967" y="431" text-anchor="middle" class="node-copy">DB_NAME · DB_USER · DB_PASSWORD</text>
+  <path d="M825 400H755" class="config-edge"/>
+
+  <path d="M560 457V515" class="edge"/>
+  <text x="579" y="491" class="small">conexión a PostgreSQL</text>
+
+  <rect x="365" y="515" width="390" height="94" rx="14" class="service"/>
+  <text x="560" y="551" text-anchor="middle" class="node-title">Service: todo-app-data-service</text>
+  <text x="560" y="579" text-anchor="middle" class="node-copy">ClusterIP · puerto 5432 (interno)</text>
+
+  <path d="M560 609V655" class="edge"/>
+
+  <rect x="365" y="655" width="390" height="112" rx="14" class="workload"/>
+  <text x="560" y="690" text-anchor="middle" class="node-title">StatefulSet: todo-app-data</text>
+  <text x="560" y="717" text-anchor="middle" class="node-copy">Pod PostgreSQL · puerto 5432</text>
+  <text x="560" y="741" text-anchor="middle" class="node-copy">ConfigMap: todo-app-data-cm</text>
+
+  <rect x="825" y="655" width="285" height="112" rx="14" class="config"/>
+  <text x="967" y="690" text-anchor="middle" class="node-title">Configuración DB</text>
+  <text x="967" y="717" text-anchor="middle" class="node-copy">POSTGRES_PASSWORD</text>
+  <text x="967" y="741" text-anchor="middle" class="node-copy">DB_NAME · DB_PORT</text>
+  <path d="M825 710H755" class="config-edge"/>
+
+  <path d="M560 767V788H1130V540H1110" class="edge"/>
+  <rect x="825" y="485" width="285" height="118" rx="14" class="storage"/>
+  <text x="967" y="513" text-anchor="middle" class="node-title">Almacenamiento persistente</text>
+  <text x="967" y="537" text-anchor="middle" class="node-copy">PVC 100Mi → PV 100Mi</text>
+  <text x="967" y="560" text-anchor="middle" class="node-copy">hostPath del nodo: /data/pv0001</text>
+  <text x="967" y="583" text-anchor="middle" class="node-copy">Montaje en PostgreSQL: /var/lib/postgresql</text>
+
+  <text x="48" y="817" class="small">El LoadBalancer requiere soporte del entorno; para acceso local se muestra port-forward.</text>
+</svg>

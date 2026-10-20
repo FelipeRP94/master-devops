@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: todo-app-data
+spec:
+  selector:
+    matchLabels:
+      app: todo-app-data
+  serviceName: todo-app-data
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: todo-app-data
+    spec:
+      containers:
+        - name: todo-app-data
+          image: lemoncodersbc/lc-todo-monolith-psql:v5-2024
+          ports:
+            - containerPort: 5432
+              name: db-port
+          volumeMounts:
+            - name: db-data
+              mountPath: /var/lib/postgresql
+          envFrom:
+            - configMapRef:
+                name: todo-app-data-cm
+      volumes:
+        - name: db-data
+          persistentVolumeClaim:
+            claimName: todo-app-data-pvc
