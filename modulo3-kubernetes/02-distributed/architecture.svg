@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="600" viewBox="0 0 1100 600" role="img" aria-labelledby="title desc">
+  <title id="title">Arquitectura de la aplicación Todo en Kubernetes</title>
+  <desc id="desc">El navegador entra por el Ingress NGINX. La ruta raíz llega al Service y pod del frontend; la ruta API llega al Service y pod de la API. El frontend también consume la API a través de su Service interno.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#526581"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2673c9"/>
+    </marker>
+    <style>
+      .title { font: 700 25px Arial, sans-serif; fill: #16243a; }
+      .label { font: 700 17px Arial, sans-serif; fill: #16243a; }
+      .text { font: 14px Arial, sans-serif; fill: #33445e; }
+      .small { font: 12px Arial, sans-serif; fill: #526581; }
+      .box { stroke-width: 2; rx: 14; }
+      .edge { fill: none; stroke: #526581; stroke-width: 2.5; marker-end: url(#arrow); }
+      .api-edge { fill: none; stroke: #2673c9; stroke-width: 2.5; stroke-dasharray: 8 6; marker-end: url(#arrow-blue); }
+    </style>
+  </defs>
+
+  <rect width="1100" height="600" fill="#f5f8fc"/>
+  <text x="550" y="43" text-anchor="middle" class="title">Aplicación Todo distribuida en Kubernetes</text>
+  <text x="550" y="68" text-anchor="middle" class="small">Minikube · Ingress NGINX · Services ClusterIP · Deployments</text>
+
+  <rect x="38" y="228" width="165" height="94" class="box" fill="#ffffff" stroke="#aab8ca"/>
+  <text x="120" y="266" text-anchor="middle" class="label">Navegador</text>
+  <text x="120" y="290" text-anchor="middle" class="text">HTTP</text>
+
+  <rect x="280" y="215" width="205" height="120" class="box" fill="#e9f2ff" stroke="#2673c9"/>
+  <text x="382" y="253" text-anchor="middle" class="label">Ingress NGINX</text>
+  <text x="382" y="278" text-anchor="middle" class="text">todo-ingress</text>
+  <text x="382" y="302" text-anchor="middle" class="small">Host configurado en ingress.yaml</text>
+
+  <rect x="615" y="105" width="200" height="100" class="box" fill="#eaf8f0" stroke="#33966a"/>
+  <text x="715" y="142" text-anchor="middle" class="label">Service frontend</text>
+  <text x="715" y="167" text-anchor="middle" class="text">todo-front-service :80</text>
+
+  <rect x="865" y="105" width="195" height="100" class="box" fill="#ffffff" stroke="#33966a"/>
+  <text x="962" y="142" text-anchor="middle" class="label">Pod frontend</text>
+  <text x="962" y="167" text-anchor="middle" class="text">todo-front :80</text>
+
+  <rect x="615" y="385" width="200" height="100" class="box" fill="#fff3e6" stroke="#dd8a27"/>
+  <text x="715" y="422" text-anchor="middle" class="label">Service API</text>
+  <text x="715" y="447" text-anchor="middle" class="text">todo-api-service :3000</text>
+
+  <rect x="865" y="385" width="195" height="100" class="box" fill="#ffffff" stroke="#dd8a27"/>
+  <text x="962" y="422" text-anchor="middle" class="label">Pod API</text>
+  <text x="962" y="447" text-anchor="middle" class="text">todo-api :3000</text>
+
+  <path d="M203 275 H280" class="edge"/>
+  <text x="240" y="260" text-anchor="middle" class="small">petición</text>
+
+  <path d="M485 245 C535 245 555 155 615 155" class="edge"/>
+  <text x="548" y="190" text-anchor="middle" class="small">/</text>
+  <path d="M485 305 C535 305 555 435 615 435" class="edge"/>
+  <text x="548" y="380" text-anchor="middle" class="small">/api</text>
+
+  <path d="M815 155 H865" class="edge"/>
+  <path d="M815 435 H865" class="edge"/>
+
+  <path d="M915 205 C900 275 820 315 735 385" class="api-edge"/>
+  <text x="837" y="304" text-anchor="middle" class="small" fill="#2673c9">API_HOST · HTTP /api</text>
+
+  <rect x="38" y="530" width="1022" height="42" rx="10" fill="#ffffff" stroke="#d5deea"/>
+  <line x1="65" y1="551" x2="115" y2="551" stroke="#526581" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="128" y="556" class="small">Enrutamiento del Ingress</text>
+  <line x1="390" y1="551" x2="440" y2="551" stroke="#2673c9" stroke-width="2.5" stroke-dasharray="8 6" marker-end="url(#arrow-blue)"/>
+  <text x="453" y="556" class="small">Llamada interna del frontend a la API usando DNS del Service</text>
+</svg>
