@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: hangman-front
+  IMAGE_NAME: feliperp94/hangman-front
 
 jobs:
   build-and-push:
