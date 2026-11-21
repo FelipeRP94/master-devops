@@ -1,0 +1,37 @@
+pipeline {
+    agent {
+        docker {
+            image 'gradle:6.6.1-jre14-openj9'
+        }
+    }
+    stages {
+        stage('Checkout code') {
+            steps {
+                echo 'Checkout code...'
+                script {
+                    git branch: 'master',
+                        credentialsId: 'git',
+                        url: 'https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git'
+                }
+            }
+        }
+
+        stage('Compile') {
+            steps {
+                echo 'Compiling...'
+                dir('03-cd/exercises/jenkins-resources/calculator') {
+                    sh './gradlew compileJava'
+                }
+            }
+        }
+
+        stage('Testing') {
+            steps {
+                echo 'Testing...'
+                dir('03-cd/exercises/jenkins-resources/calculator') {
+                    sh './gradlew test'
+                }
+            }
+        }
+    }
+}

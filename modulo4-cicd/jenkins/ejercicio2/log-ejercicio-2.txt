@@ -1,0 +1,188 @@
+Started by user admin
+Obtained 03-cd/exercises/jenkins-resources/calculator/Jenkinsfile.docker from git https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/ejercicio-2
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: git
+using credential git
+Cloning the remote Git repository
+Cloning repository https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git
+ > git init /var/jenkins_home/workspace/ejercicio-2 # timeout=10
+Fetching upstream changes from https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --force --progress -- https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 2c5667e9a1bc8c796bfd3ebb3692cb19c4893592 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 2c5667e9a1bc8c796bfd3ebb3692cb19c4893592 # timeout=10
+Commit message: "feat: add Jenkinsfile for CI pipeline setup with compile and testing stages"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . gradle:6.6.1-jre14-openj9
+
+error: no such object: gradle:6.6.1-jre14-openj9
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker pull gradle:6.6.1-jre14-openj9
+6.6.1-jre14-openj9: Pulling from library/gradle
+97107a361991: Pulling fs layer
+9d0088d94767: Pulling fs layer
+dd4d4e9526b1: Pulling fs layer
+bf3d390cead9: Pulling fs layer
+171857c49d0f: Pulling fs layer
+419640447d26: Pulling fs layer
+61e52f862619: Pulling fs layer
+4d606aeb4725: Pulling fs layer
+dd4d4e9526b1: Download complete
+9d0088d94767: Download complete
+bf3d390cead9: Download complete
+419640447d26: Download complete
+61e52f862619: Download complete
+4d606aeb4725: Download complete
+171857c49d0f: Download complete
+97107a361991: Download complete
+419640447d26: Pull complete
+171857c49d0f: Pull complete
+61e52f862619: Pull complete
+dd4d4e9526b1: Pull complete
+bf3d390cead9: Pull complete
+4d606aeb4725: Pull complete
+9d0088d94767: Pull complete
+97107a361991: Pull complete
+Digest: sha256:53e66d3453fd3a808b74ceb6f7f545e0eec863176dcaaac977720af457e8cc90
+Status: Downloaded newer image for gradle:6.6.1-jre14-openj9
+docker.io/library/gradle:6.6.1-jre14-openj9
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container 1a6951e4cc7f5318a4d32348d799424a07b7a3235b2e45155c47ad745800c51d
+but /var/jenkins_home/workspace/ejercicio-2 could not be found among []
+but /var/jenkins_home/workspace/ejercicio-2@tmp could not be found among []
+$ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/ejercicio-2 -v /var/jenkins_home/workspace/ejercicio-2:/var/jenkins_home/workspace/ejercicio-2:rw,z -v /var/jenkins_home/workspace/ejercicio-2@tmp:/var/jenkins_home/workspace/ejercicio-2@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** gradle:6.6.1-jre14-openj9 cat
+$ docker top c1f03f00c932981f19a7223757ba555d5c1152f6f19ad966a89c206e2a98b659 -eo pid,comm
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout code)
+[Pipeline] echo
+Checkout code...
+[Pipeline] script
+[Pipeline] {
+[Pipeline] git
+The recommended git tool is: git
+using credential git
+Warning: JENKINS-30600: special launcher org.jenkinsci.plugins.docker.workflow.WithContainerStep$Decorator$1@5c31afd0; decorates hudson.Launcher$LocalLauncher@424106db will be ignored (a typical symptom is the Git executable not being run inside a designated container)
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/ejercicio-2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git # timeout=10
+Fetching upstream changes from https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --force --progress -- https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 2c5667e9a1bc8c796bfd3ebb3692cb19c4893592 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 2c5667e9a1bc8c796bfd3ebb3692cb19c4893592 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b master 2c5667e9a1bc8c796bfd3ebb3692cb19c4893592 # timeout=10
+Commit message: "feat: add Jenkinsfile for CI pipeline setup with compile and testing stages"
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Compile)
+[Pipeline] echo
+Compiling...
+[Pipeline] dir
+Running in /var/jenkins_home/workspace/ejercicio-2/03-cd/exercises/jenkins-resources/calculator
+[Pipeline] {
+[Pipeline] sh
++ ./gradlew compileJava
+Downloading https://services.gradle.org/distributions/gradle-7.6.6-bin.zip
+............10%............20%............30%............40%.............50%............60%............70%............80%.............90%............100%
+
+Welcome to Gradle 7.6.6!
+
+Here are the highlights of this release:
+ - Added support for Java 19.
+ - Introduced `--rerun` flag for individual task rerun.
+ - Improved dependency block for test suites to be strongly typed.
+ - Added a pluggable system for Java toolchains provisioning.
+
+For more details see https://docs.gradle.org/7.6.6/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :compileJava
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 8.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+See https://docs.gradle.org/7.6.6/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 39s
+1 actionable task: 1 executed
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Testing)
+[Pipeline] echo
+Testing...
+[Pipeline] dir
+Running in /var/jenkins_home/workspace/ejercicio-2/03-cd/exercises/jenkins-resources/calculator
+[Pipeline] {
+[Pipeline] sh
++ ./gradlew test
+> Task :compileJava UP-TO-DATE
+> Task :processResources
+> Task :classes
+> Task :compileTestJava
+> Task :processTestResources NO-SOURCE
+> Task :testClasses
+> Task :test
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 8.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+See https://docs.gradle.org/7.6.6/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 9s
+4 actionable tasks: 3 executed, 1 up-to-date
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+$ docker stop --time=1 c1f03f00c932981f19a7223757ba555d5c1152f6f19ad966a89c206e2a98b659
+$ docker rm -f --volumes c1f03f00c932981f19a7223757ba555d5c1152f6f19ad966a89c206e2a98b659
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

@@ -1,0 +1,131 @@
+Started by user admin
+Obtained 03-cd/exercises/jenkins-resources/calculator/Jenkinsfile from git https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/ejercicio-1
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: git
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git
+ > git init /var/jenkins_home/workspace/ejercicio-1 # timeout=10
+Fetching upstream changes from https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 2c5667e9a1bc8c796bfd3ebb3692cb19c4893592 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 2c5667e9a1bc8c796bfd3ebb3692cb19c4893592 # timeout=10
+Commit message: "feat: add Jenkinsfile for CI pipeline setup with compile and testing stages"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout code)
+[Pipeline] echo
+Checkout code...
+[Pipeline] script
+[Pipeline] {
+[Pipeline] git
+The recommended git tool is: git
+using credential git
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/ejercicio-1/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git # timeout=10
+Fetching upstream changes from https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --force --progress -- https://github.com/FelipeRP94/bootcamp-devops-lemoncode.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision 2c5667e9a1bc8c796bfd3ebb3692cb19c4893592 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 2c5667e9a1bc8c796bfd3ebb3692cb19c4893592 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b master 2c5667e9a1bc8c796bfd3ebb3692cb19c4893592 # timeout=10
+Commit message: "feat: add Jenkinsfile for CI pipeline setup with compile and testing stages"
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Compile)
+[Pipeline] echo
+Compiling...
+[Pipeline] dir
+Running in /var/jenkins_home/workspace/ejercicio-1/03-cd/exercises/jenkins-resources/calculator
+[Pipeline] {
+[Pipeline] sh
++ ./gradlew compileJava
+Downloading https://services.gradle.org/distributions/gradle-7.6.6-bin.zip
+............10%............20%............30%............40%.............50%............60%............70%............80%.............90%............100%
+
+Welcome to Gradle 7.6.6!
+
+Here are the highlights of this release:
+ - Added support for Java 19.
+ - Introduced `--rerun` flag for individual task rerun.
+ - Improved dependency block for test suites to be strongly typed.
+ - Added a pluggable system for Java toolchains provisioning.
+
+For more details see https://docs.gradle.org/7.6.6/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :compileJava
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 8.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+See https://docs.gradle.org/7.6.6/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 24s
+1 actionable task: 1 executed
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Testing)
+[Pipeline] echo
+Testing...
+[Pipeline] dir
+Running in /var/jenkins_home/workspace/ejercicio-1/03-cd/exercises/jenkins-resources/calculator
+[Pipeline] {
+[Pipeline] sh
++ ./gradlew test
+> Task :compileJava UP-TO-DATE
+> Task :processResources
+> Task :classes
+> Task :compileTestJava
+> Task :processTestResources NO-SOURCE
+> Task :testClasses
+> Task :test
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 8.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+See https://docs.gradle.org/7.6.6/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 5s
+4 actionable tasks: 3 executed, 1 up-to-date
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
