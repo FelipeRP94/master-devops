@@ -1,0 +1,39 @@
+name: E2E Testing
+
+on:
+  workflow_dispatch:
+    paths:
+      - "03-cd/03-github-actions/.start-code/**"
+  push:
+    branches:
+      - master
+    paths:
+      - "03-cd/03-github-actions/.start-code/**"
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "03-cd/03-github-actions/.start-code/**"
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 03-cd/03-github-actions/.start-code
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build and start services
+        run: docker compose -f compose-e2e.yml up --build -d
+
+      - name: Wait for services to be ready
+        run: |
+          echo "Waiting for services to be ready..."
+          sleep 10
+
+      - name: Run E2E tests
+        uses: cypress-io/github-action@v7
+        with:
+          working-directory: 03-cd/03-github-actions/.start-code/hangman-e2e/e2e
